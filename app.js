@@ -36,9 +36,6 @@ function handleFileSelect(evt)
 
 function uploadFile(file)
 {
-  // authUrl='http://5.79.16.179:8080/v1/AUTH_0251e600096b454f8fc046e1f27f7e61';
-  // container='foo';
-  // token='b77b7b3600a946d7837b7008236fc020'
   authUrl=document.getElementById('authurl').value;
   container=document.getElementById('container').value;
   token=document.getElementById('authtoken').value;
