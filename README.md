@@ -1,4 +1,4 @@
 cors-swift-example
 ==================
 
-An example to upload to Swift via Cors.
+An sample HTML application to illustrate how to upload to Swift via Cors.
