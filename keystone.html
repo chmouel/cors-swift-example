@@ -1,0 +1,72 @@
+<html>
+<head>
+  <title> "Swift CORS Text page" </title>
+ <link rel="stylesheet" type="text/css" href="styles.css" />
+ <script type="text/javascript">
+      function submit() {
+          var password = document.getElementById('password').value;
+          var username = document.getElementById('username').value;
+          var tenant = document.getElementById('tenant').value;
+          var url = document.getElementById('authurl').value;
+
+          document.getElementById('response_headers').textContent = null;
+          document.getElementById('response_body').textContent = null;
+
+          var request = new XMLHttpRequest();
+
+          request.onreadystatechange = function (oEvent) {
+              if (request.readyState == 4) {
+                  responseHeaders = 'Status: ' + request.status;
+                  responseHeaders = responseHeaders + '\nStatus Text: ' + request.statusText;
+                  responseHeaders = responseHeaders + '\n\n' + request.getAllResponseHeaders();
+                  document.getElementById('response_headers').textContent = responseHeaders;
+                  document.getElementById('response_body').textContent = request.responseText;
+              }
+          }
+
+          json = '{"auth": {"tenantName": "' + tenant +
+                         '", "passwordCredentials": {"username": "' +
+                         tenant + '", "password": "' +
+                         password + '"}}}'
+
+          request.open('POST', url);
+          request.setRequestHeader("Content-type","application/json");
+          request.send(json);
+      }
+ </script>
+</head>
+
+<body>
+  <table>
+    <tr>
+      <td>Full Keystone tokens URL (with /tokens):</td>
+      <td><input type="text" id="authurl" size="100"/></td>
+    </tr>
+
+    <tr>
+      <td>Tenant</td>
+      <td><input type="text" id="tenant"  size="100"/></td>
+    </tr>
+
+    <tr>
+      <td>Username</td>
+      <td><input type="text" id="username"  size="100"/></td>
+    </tr>
+
+
+    <tr>
+      <td>Password:</td>
+      <td><input type="text"  id="password" size="100"/></td>
+    </tr>
+  </table>
+
+  <input id="submit" type="button" value="Submit" onclick="submit(); return false;">
+
+  <pre id="response_headers"></pre>
+  <p/>
+  <hr>
+  <pre id="response_body"></pre>
+
+</body>
+
+</html>
